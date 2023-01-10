@@ -4,7 +4,8 @@
     "dependencies": {
         "core": "*",
         "radio": "*",
-        "microphone": "*"
+        "microphone": "*",
+        "LoRa-AT-Interface": "github:paeber/lora-at-interface#ea782e730a0e3066c598155b36cb17c8fc00ccd5"
     },
     "files": [
         "main.blocks",
