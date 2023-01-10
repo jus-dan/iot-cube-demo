@@ -17,13 +17,17 @@ function Registriere_IoT_Cube (CubeNummer: number) {
     )
 }
 Registriere_IoT_Cube(1)
-basic.forever(function () {
-    if (IoTCube.checkEvent(eRAK_EVT.JOINED)) {
+let _4digit = grove.createDisplay(DigitalPin.P2, DigitalPin.P16)
+_4digit.show(1234)
+loops.everyInterval(10000, function () {
+    if (IoTCube.getStatus(eSTATUS_MASK.JOINED)) {
         basic.showIcon(IconNames.SmallSquare)
-        IoTCube.addTemperature(pins.analogReadPin(AnalogPin.P0), Channels.One)
+        _4digit.show(grove.measureInCentimetersV2(DigitalPin.P1))
+        IoTCube.addTemperature(input.temperature(), Channels.One)
+        IoTCube.addAnalogInput(grove.measureInCentimetersV2(DigitalPin.P1), Channels.Two)
+        IoTCube.addIlluminance(pins.analogReadPin(AnalogPin.P2), Channels.Three)
         IoTCube.SendBuffer(IoTCube.getCayenne(), Channels.One)
         basic.showIcon(IconNames.SmallDiamond)
-        basic.pause(10000)
     } else {
         basic.showIcon(IconNames.Skull)
     }

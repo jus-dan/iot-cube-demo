@@ -5,7 +5,8 @@
         "core": "*",
         "radio": "*",
         "microphone": "*",
-        "LoRa-AT-Interface": "github:paeber/lora-at-interface#ea782e730a0e3066c598155b36cb17c8fc00ccd5"
+        "LoRa-AT-Interface": "github:paeber/lora-at-interface#ea782e730a0e3066c598155b36cb17c8fc00ccd5",
+        "Grove": "github:seeed-studio/pxt-grove#v0.5.0"
     },
     "files": [
         "main.blocks",
