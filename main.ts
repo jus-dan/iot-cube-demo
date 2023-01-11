@@ -26,10 +26,21 @@ function Registriere_IoT_Cube (CubeNummer: number) {
     )
 }
 Registriere_IoT_Cube(1)
+let höchste_Lautstärke = 0
+let strip = neopixel.create(DigitalPin.P2, 10, NeoPixelMode.RGB)
 loops.everyInterval(10000, function () {
     basic.showIcon(IconNames.SmallSquare)
     IoTCube.addTemperature(input.temperature(), Channels.One)
-    IoTCube.addAnalogInput(input.soundLevel(), Channels.One)
+    IoTCube.addAnalogInput(höchste_Lautstärke, Channels.One)
     IoTCube.SendBuffer(IoTCube.getCayenne(), Channels.One)
     basic.showIcon(IconNames.SmallDiamond)
+    basic.showNumber(höchste_Lautstärke)
+    höchste_Lautstärke = 0
+})
+basic.forever(function () {
+    strip.showBarGraph(input.soundLevel(), 255)
+    strip.show()
+    if (input.soundLevel() > höchste_Lautstärke) {
+        höchste_Lautstärke = input.soundLevel()
+    }
 })
