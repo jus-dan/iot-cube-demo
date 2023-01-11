@@ -17,6 +17,15 @@ function Registriere_IoT_Cube (CubeNummer: number) {
         "A"
         )
     }
+    if (CubeNummer == 3) {
+        IoTCube.OTAA_Setup(
+        "0000000000000006",
+        "AC1F09FFFE083809",
+        "52A4E4802669CD3D89CCC04695B7D274",
+        eBands.EU868,
+        "A"
+        )
+    }
     basic.pause(1000)
     IoTCube.LoRa_Join(
     eBool.enable,
@@ -25,7 +34,7 @@ function Registriere_IoT_Cube (CubeNummer: number) {
     8
     )
 }
-Registriere_IoT_Cube(1)
+Registriere_IoT_Cube(3)
 let höchste_Lautstärke = 0
 let strip = neopixel.create(DigitalPin.P2, 10, NeoPixelMode.RGB)
 loops.everyInterval(10000, function () {
