@@ -26,6 +26,24 @@ function Registriere_IoT_Cube (CubeNummer: number) {
         "A"
         )
     }
+    if (CubeNummer == 4) {
+        IoTCube.OTAA_Setup(
+        "0000000000000006",
+        "AC1F09FFFE08381F",
+        "52A4E4802669CD3D89CCC04695B7D274",
+        eBands.EU868,
+        "A"
+        )
+    }
+    if (CubeNummer == 8) {
+        IoTCube.OTAA_Setup(
+        "0000000000000006",
+        "AC1F09FFFE08391E",
+        "402265A6EB5BE7AD87F5675737B41C5A",
+        eBands.EU868,
+        "A"
+        )
+    }
     basic.pause(1000)
     IoTCube.LoRa_Join(
     eBool.enable,
@@ -34,13 +52,14 @@ function Registriere_IoT_Cube (CubeNummer: number) {
     8
     )
 }
-Registriere_IoT_Cube(3)
 let höchste_Lautstärke = 0
+Registriere_IoT_Cube(4)
 let strip = neopixel.create(DigitalPin.P2, 10, NeoPixelMode.RGB)
 loops.everyInterval(10000, function () {
     basic.showIcon(IconNames.SmallSquare)
     IoTCube.addTemperature(input.temperature(), Channels.One)
     IoTCube.addAnalogInput(höchste_Lautstärke, Channels.One)
+    IoTCube.addAnalogInput(input.lightLevel(), Channels.Two)
     IoTCube.SendBuffer(IoTCube.getCayenne(), Channels.One)
     basic.showIcon(IconNames.SmallDiamond)
     basic.showNumber(höchste_Lautstärke)
